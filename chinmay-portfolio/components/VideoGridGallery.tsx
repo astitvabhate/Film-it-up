@@ -14,14 +14,15 @@ export type Item = {
 interface VideoCardProps {
   item: Item;
   onClick: (item: Item) => void;
+  isMobileOrTablet: boolean;
 }
 
-function VideoCard({ item, onClick }: VideoCardProps) {
+function VideoCard({ item, onClick, isMobileOrTablet }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
-  // Handle Play/Pause on Hover
+  // Autoplay on mobile/tablet, hover-play on desktop
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -36,21 +37,27 @@ function VideoCard({ item, onClick }: VideoCardProps) {
       }
     };
 
-    if (isHovered) {
+    if (isMobileOrTablet) {
+      // Mobile/Tablet: Always autoplay muted
       safePlay();
     } else {
-      video.pause();
-      setIsPlaying(false);
+      // Desktop: Hover to play
+      if (isHovered) {
+        safePlay();
+      } else {
+        video.pause();
+        setIsPlaying(false);
+      }
     }
-  }, [isHovered]);
+  }, [isHovered, isMobileOrTablet]);
 
   return (
     <motion.div
       className="group relative w-full aspect-video rounded-xl overflow-hidden cursor-pointer bg-zinc-900 border border-white/5 shadow-lg will-change-transform"
-      whileHover={{ y: -6, scale: 1.02 }}
+      whileHover={isMobileOrTablet ? {} : { y: -6, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => !isMobileOrTablet && setIsHovered(true)}
+      onMouseLeave={() => !isMobileOrTablet && setIsHovered(false)}
       onClick={() => onClick(item)}
     >
       {/* Video / Poster Layer */}
@@ -67,19 +74,21 @@ function VideoCard({ item, onClick }: VideoCardProps) {
       {/* Overlay: Gradient for text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80 opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
 
-      {/* Play Icon (Center - hidden when playing) */}
-      <div
-        className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-300 ${isPlaying ? 'opacity-0' : 'opacity-100'}`}
-      >
-        <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform duration-300">
-          <svg
-            className="w-6 h-6 text-white fill-current translate-x-0.5"
-            viewBox="0 0 24 24"
-          >
-            <path d="M8 5v14l11-7z" />
-          </svg>
+      {/* Play Icon - Only show on desktop when not playing */}
+      {!isMobileOrTablet && (
+        <div
+          className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-300 ${isPlaying ? 'opacity-0' : 'opacity-100'}`}
+        >
+          <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform duration-300">
+            <svg
+              className="w-6 h-6 text-white fill-current translate-x-0.5"
+              viewBox="0 0 24 24"
+            >
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Title Content (Bottom) */}
       {item.title && (
@@ -97,6 +106,17 @@ function VideoCard({ item, onClick }: VideoCardProps) {
 export default function VideoGridGallery({ items }: { items: Item[] }) {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [isMuted, setIsMuted] = useState(false);
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+
+  // Detect mobile/tablet (< 1024px which is lg breakpoint)
+  useEffect(() => {
+    const checkDevice = () => {
+      setIsMobileOrTablet(window.innerWidth < 1024);
+    };
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
 
   // Close modal on Escape key
   useEffect(() => {
@@ -117,6 +137,7 @@ export default function VideoGridGallery({ items }: { items: Item[] }) {
               key={item.id}
               item={item}
               onClick={(it) => setSelectedItem(it)}
+              isMobileOrTablet={isMobileOrTablet}
             />
           ))}
         </div>

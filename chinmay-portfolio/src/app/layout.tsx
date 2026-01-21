@@ -2,6 +2,7 @@
 import "./globals.css";
 import React from "react";
 import Header from "../../components/Header";
+import PageTransition from "../../components/PageTransition";
 
 export const metadata = {
   title: "Chinmay Kunhare — Portfolio",
@@ -16,7 +17,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Header />
 
           <main className="flex-1 w-full">
-            <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">{children}</div>
+            <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
+              <PageTransition>{children}</PageTransition>
+            </div>
           </main>
 
           <footer className="w-full py-6 mt-8">
