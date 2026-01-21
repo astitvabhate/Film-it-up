@@ -12,14 +12,14 @@ export default function Header() {
           <div className="p-2 rounded-full bg-white/5">
             <span className="sr-only">Chinmay</span>
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" className="opacity-95">
-             <text
+              <text
                 x="50%"
                 y="50%"
-                dominant-baseline="middle"
-                text-anchor="middle"
+                dominantBaseline="middle"
+                textAnchor="middle"
                 fill="white"
-                font-size="12"
-                font-weight="bold"
+                fontSize="12"
+                fontWeight="bold"
                 onClick={() => { window.location.href = '/'; }}
                 style={{ cursor: 'pointer' }}
               >
@@ -50,11 +50,11 @@ export default function Header() {
           >
             {open ? (
               <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" clipRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/>
+                <path fillRule="evenodd" clipRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" />
               </svg>
             ) : (
               <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 6h16M4 12h16M4 18h16"/>
+                <path d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             )}
           </button>

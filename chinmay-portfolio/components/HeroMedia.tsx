@@ -8,10 +8,10 @@ export default function HeroMedia() {
   const motionProps = prefersReduced
     ? { initial: { opacity: 1 }, animate: { opacity: 1 } }
     : {
-        initial: { opacity: 0, y: 20 },
-        animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.6 },
-      };
+      initial: { opacity: 0, y: 20 },
+      animate: { opacity: 1, y: 0 },
+      transition: { duration: 0.6 },
+    };
 
   return (
     <div className="relative w-full max-w-7xl mx-auto">
@@ -46,53 +46,50 @@ export default function HeroMedia() {
 
 
 
-<motion.h1
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, ease: "easeOut" }}
-  viewport={{ once: true }}
-  className="font-black pt-5 text-white uppercase 
-  text-5xl sm:text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight"
->
-  <span>Enter a world of</span>
-  <br />
-  <span>cinematic storytelling</span>
-  <br />
-  <span>through my</span>
-  <br />
-  <span>lens</span>
-</motion.h1>
+      <motion.h1
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="font-black pt-5 text-white uppercase text-5xl sm:text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight"
+      >
+        <span>Enter a world of</span>
+        <br />
+        <span>cinematic storytelling</span>
+        <br />
+        <span>through my</span>
+        <br />
+        <span>lens</span>
+      </motion.h1>
 
 
-        
 
 
-<div className="relative mt-10 w-full">
 
-  <div className="w-full bg-gradient-to-r from-white/10 via-white/5 to-transparent
-      backdrop-blur-md border-y border-white/10
-      py-10 px-4 sm:px-8 md:px-12">
+      <div className="relative mt-10 w-full">
 
-    <div className="max-w-6xl mx-auto">
+        <div className="w-full bg-gradient-to-r from-white/10 via-white/5 to-transparent backdrop-blur-md border-y border-white/10 py-10 px-4 sm:px-8 md:px-12">
 
-      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight mb-4">
-        Crafting Stories Through Motion
-      </h3>
+          <div className="max-w-6xl mx-auto">
 
-      <p className="text-base sm:text-lg md:text-xl leading-relaxed text-neutral-200">
-        I’m <span className="font-extrabold text-white">Chinmay Kunhare</span>,
-        a videographer and cinematographer who believes in capturing moments that speak 
-        beyond the frame. With a love for storytelling and a strong visual instinct, I create 
-        films and visuals that feel immersive, expressive, and full of life. My work blends 
-        creativity, emotion, and cinematic composition to deliver stories that stay with 
-        the audience.
-      </p>
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight mb-4">
+              Crafting Stories Through Motion
+            </h3>
 
-    </div>
+            <p className="text-base sm:text-lg md:text-xl leading-relaxed text-neutral-200">
+              I’m <span className="font-extrabold text-white">Chinmay Kunhare</span>,
+              a videographer and cinematographer who believes in capturing moments that speak
+              beyond the frame. With a love for storytelling and a strong visual instinct, I create
+              films and visuals that feel immersive, expressive, and full of life. My work blends
+              creativity, emotion, and cinematic composition to deliver stories that stay with
+              the audience.
+            </p>
 
-  </div>
+          </div>
 
-</div>
+        </div>
+
+      </div>
 
 
 
