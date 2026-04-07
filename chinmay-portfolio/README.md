@@ -1,8 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Cloudinary Media Migration
+
+This portfolio currently keeps images and videos in `public/`, which makes the repository heavy. The app now supports serving those files from Cloudinary through a manifest file at `src/data/cloudinary-media.json`.
+
+### Upload existing media to Cloudinary
+
+1. Create a `.env.local` file with:
+
+```bash
+CLOUDINARY_CLOUD_NAME=your-cloud-name
+CLOUDINARY_API_KEY=your-api-key
+CLOUDINARY_API_SECRET=your-api-secret
+CLOUDINARY_UPLOAD_PREFIX=chinmay-portfolio
+```
+
+2. Run:
+
+```bash
+npm run media:upload
+```
+
+3. The upload script will push supported files from `public/` to Cloudinary and update `src/data/cloudinary-media.json` with the returned secure URLs.
+
+4. After that, the app will automatically use Cloudinary URLs instead of local `/public` paths for those assets.
+
+5. Once you verify everything works, you can remove the large media files from `public/` and from git history in a separate cleanup step.
+
+Use `npm run media:upload -- --force` if you want to re-upload and overwrite existing manifest entries.
 
 ## Getting Started
 
-First, run the development server:
+Run the development server:
 
 ```bash
 npm run dev

@@ -1,15 +1,16 @@
 // app/page.tsx
 "use client";
 import Link from "next/link";
+import { resolveMediaUrl } from "@/lib/media";
 import HeroMedia from "../../components/HeroMedia";
 import VideoGridGallery from "../../components/VideoGridGallery";
 
 
 const VIDEOS = [
-  { id: "v1", src: "/videos/IMG_3107.mp4", poster: "/images/31107.jpg" },
-  { id: "v2", src: "/videos/udaipur.mp4", poster: "/images/cover_udaipur.jpg"},
-  { id: "v3", src: "/videos/IMG_3086.mp4", poster: "/images/3086.jpg" },
-  { id: "v4", src: "/videos/IMG_3087.mp4", poster: "/images/3087.jpg" },
+  { id: "v1", src: resolveMediaUrl("/videos/IMG_3107.mp4"), poster: resolveMediaUrl("/images/31107.jpg") },
+  { id: "v2", src: resolveMediaUrl("/videos/udaipur.mp4"), poster: resolveMediaUrl("/images/cover_udaipur.jpg") },
+  { id: "v3", src: resolveMediaUrl("/videos/IMG_3086.mp4"), poster: resolveMediaUrl("/images/3086.jpg") },
+  { id: "v4", src: resolveMediaUrl("/videos/IMG_3087.mp4"), poster: resolveMediaUrl("/images/3087.jpg") },
   
 
 ];

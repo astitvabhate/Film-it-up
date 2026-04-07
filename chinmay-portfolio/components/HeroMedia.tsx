@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { resolveMediaUrl } from "@/lib/media";
 
 export default function HeroMedia() {
   const prefersReduced = useReducedMotion();
@@ -19,7 +20,7 @@ export default function HeroMedia() {
 
         {/* Static hero image */}
         <img
-          src="/images/chinmay.jpg"
+          src={resolveMediaUrl("/images/chinmay.jpg")}
           alt="Chinmay Kunhare"
           className="w-full h-full object-cover absolute inset-0"
         />

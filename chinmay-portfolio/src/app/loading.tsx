@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import { resolveMediaUrl } from "@/lib/media";
 
 export default function Loading() {
     return (
@@ -16,7 +17,7 @@ export default function Loading() {
                 }}
             >
                 <img
-                    src="/images/lens2.png"
+                    src={resolveMediaUrl("/images/lens2.png")}
                     alt="Loading..."
                     className="w-20 h-20 sm:w-24 sm:h-24"
                 />

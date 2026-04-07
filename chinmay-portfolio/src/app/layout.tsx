@@ -1,6 +1,5 @@
 // app/layout.tsx
 import "./globals.css";
-import Link from "next/link";
 import React from "react";
 import Header from "../../components/Header";
 

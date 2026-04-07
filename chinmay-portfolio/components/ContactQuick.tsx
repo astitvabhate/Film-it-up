@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
-import { FiInstagram, FiExternalLink, FiClock, FiPhone } from "react-icons/fi";
+import React, { useState } from "react";
+import { FiInstagram, FiPhone } from "react-icons/fi";
 import { IoLogoWhatsapp } from "react-icons/io";
 import Image from "next/image";
+import { resolveMediaUrl } from "@/lib/media";
 
 
 
@@ -18,20 +19,6 @@ function buildWhatsAppUrl(phone: string, text?: string) {
   return `https://wa.me/${digits}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
 }
 
-// Decorative QR SVG generator
-function decorativeQrDataUrl(username: string) {
-  const url = buildInstagramWebUrl(username);
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 220' width='440' height='440'>
-    <rect rx='24' width='100%' height='100%' fill='#0f172a'/>
-    <g fill='white' font-family='Inter, system-ui, sans-serif' text-anchor='middle'>
-      <text x='50%' y='45%' font-size='14' opacity='0.9'>Open</text>
-      <text x='50%' y='60%' font-size='20' font-weight='700'>Instagram</text>
-      <text x='50%' y='80%' font-size='13' opacity='0.85'>@${username}</text>
-    </g>
-  </svg>`;
-  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
-}
-
 export default function ContactQuick({
   phone = "+919111838314",
   insta = "chinmayx",
@@ -43,7 +30,6 @@ export default function ContactQuick({
 }) {
   const instaUrl = buildInstagramWebUrl(insta);
   const waUrl = buildWhatsAppUrl(phone);
-  const qr = useMemo(() => decorativeQrDataUrl(insta), [insta]);
 
   const [opening, setOpening] = useState<null | "instagram" | "whatsapp">(null);
 
@@ -69,7 +55,7 @@ export default function ContactQuick({
         {/* Header */}
         <div className="w-full flex items-center justify-between">
           <div>
-            <div className="text-xs uppercase tracking-widest text-amber-200 font-semibold">Let's Connect</div>
+            <div className="text-xs uppercase tracking-widest text-amber-200 font-semibold">Let&apos;s Connect</div>
             <div className="flex items-center gap-2 mt-1 text-sm font-bold text-white/90">
                 <FiInstagram />
                 @chinmayx
@@ -90,7 +76,7 @@ export default function ContactQuick({
           className="rounded-xl overflow-hidden border-white/10 shadow-sm hover:scale-[1.02] transition-transform"
         >
            <Image
-            src="/images/IMG_8632.jpg"
+            src={resolveMediaUrl("/images/IMG_8632.jpg")}
             alt={`Open Instagram @${insta}`}
             width={160}
             height={160}
